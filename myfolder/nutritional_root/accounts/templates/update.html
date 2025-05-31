@@ -1,0 +1,87 @@
+{% extends "accounts/home.html" %} 
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        
+        .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            padding: 20px;
+        }
+        .form-container {
+            height: 850px;
+            width: 500px;
+            background-color: Gray;
+            position: absolute;
+            transform: translate(-50%,-50%);
+            top: 45%;
+            left: 50%;
+            border-radius: 10px;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.1);
+            box-shadow: 0 0 40px rgba(8,7,16,0.6);
+            padding: 50px 35px;
+
+        }
+        button#new {
+            padding: 12px 28px;           /* Bigger size */
+            font-size: 18px;              /* Larger text */
+            background-color: #007bff;    /* Blue color */
+            color: white;                 /* White text */
+            border: none;                 /* Remove border */
+            border-radius: 8px;           /* Rounded corners */
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        
+        button#new:hover {
+            background-color: #0056b3;    /* Darker on hover */
+        }
+        
+        .form-container select {
+            font-size: 18px;
+            padding: 8px;
+            width: 58%;
+        }
+        .list-container {
+            flex: 2;
+            min-width: 50px;
+            font-size: 15px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            overflow-x: auto; /* Scroll if table too wide */
+            width: 80%;
+            top: 48%;
+            margin-left: 350px;
+        }
+      
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 6px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+   <div class="form-container">
+        <h1>Update Student Information</h1>
+        <form action="" method="post" class="form-group card p-4">
+            {% csrf_token %}
+            {{form.as_p}}
+            
+            <input type="submit" value="Update" class="btn btn-success">
+            
+        </form>
+    </div>
+</div> 
+</body>
+</html>
+{% endblock content %}

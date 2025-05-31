@@ -1,1 +1,163 @@
+{% extends 'accounts/home.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Information</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .page-container {
+            padding: 30px;
+            background-color: #e9f4ff;
+        }
 
+        .form-card {
+            background-color: #d9d9d9;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 8px 12px;
+            text-align: left;
+            border: 1px solid #ccc;
+        }
+
+        button#new {
+            padding: 10px 24px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            margin-top: 10px;
+        }
+
+        button#new:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+
+<body>
+<div class="container-fluid page-container">
+    <div class="row g-4">
+        <!-- 🧾 Student Form -->
+        <div class="col-md-4">
+            <div class="form-card">
+                <h3 class="text-center mb-3">Add Student</h3>
+                <form method="POST">
+                    {% csrf_token %}
+                    <div class="mb-2">
+                        <label>ID Number</label>
+                        <input type="text" name="id_no" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Last Name</label>
+                        <input type="text" name="last" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>First Name</label>
+                        <input type="text" name="first" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Middle Name</label>
+                        <input type="text" name="middle" class="form-control">
+                    </div>
+                    <div class="mb-2">
+                        <label>Age</label>
+                        <input type="text" name="age" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Birthday</label>
+                        <input type="date" name="birthday" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Weight (kg)</label>
+                        <input type="number" name="weight" step="0.01" min="0" class="form-control" required>
+                    </div>
+                    <div class="mb-2">
+                        <label>Height (m)</label>
+                        <input type="number" name="height" step="0.01" min="0" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label>Gender</label>
+                        <select name="gender" class="form-select" required>
+                            <option value="Female">Female</option>
+                            <option value="Male">Male</option>
+                        </select>
+                    </div>
+                    <button type="submit" id="new">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- 📋 Student Table -->
+        <div class="col-md-8">
+            <div class="table-container">
+                <h3 class="text-center mb-3">Student List</h3>
+                <table class="table table-striped table-bordered">
+                    <thead class="table-primary">
+                        <tr>
+                            <th>ID</th>
+                            <th>Last Name</th>
+                            <th>First Name</th>
+                            <th>Middle</th>
+                            <th>Age</th>
+                            <th>Birthday</th>
+                            <th>Weight</th>
+                            <th>Height</th>
+                            <th>Gender</th>
+                            <th>BMI</th>
+                            <th>Nutritional Status</th>
+                            <th>Height for Age</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for x in mem %}
+                        <tr>
+                            <td>{{ x.id_no }}</td>
+                            <td>{{ x.last }}</td>
+                            <td>{{ x.first }}</td>
+                            <td>{{ x.middle }}</td>
+                            <td>{{ x.age }}</td>
+                            <td>{{ x.birthday }}</td>
+                            <td>{{ x.weight }}</td>
+                            <td>{{ x.height }}</td>
+                            <td>{{ x.gender }}</td>
+                            <td>{{ x.bmi }}</td>
+                            <td>{{ x.nutritional_status }}</td>
+                            <td>{{ x.height_for_age }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="9" class="text-center">No students found.</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+{% endblock %}

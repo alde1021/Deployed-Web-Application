@@ -1,0 +1,142 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+    crossorigin="anonymous"
+    />
+    <style>
+            .container {
+                display: flex;
+                justify-content: space-between;
+                align-items: flex-start;
+                padding: 20px;
+            }
+            .form-container {
+                height: 850px;
+                width: 310px;
+                background-color: Gray;
+                position: absolute;
+                transform: translate(-50%,-50%);
+                top: 45%;
+                left: 23%;
+                border-radius: 10px;
+                backdrop-filter: blur(10px);
+                border: 2px solid rgba(255,255,255,0.1);
+                box-shadow: 0 0 40px rgba(8,7,16,0.6);
+                padding: 50px 35px;
+
+            }
+            .modal-content {
+                border-radius: 10px;
+            }
+            button#new {
+                padding: 12px 28px;           /* Bigger size */
+                font-size: 18px;              /* Larger text */
+                background-color: #007bff;    /* Blue color */
+                color: white;                 /* White text */
+                border: none;                 /* Remove border */
+                border-radius: 8px;           /* Rounded corners */
+                cursor: pointer;
+                transition: background-color 0.3s ease;
+            }
+            
+            button#new:hover {
+                background-color: #0056b3;    /* Darker on hover */
+            }
+            
+            .form-container select {
+                font-size: 18px;
+                padding: 8px;
+                width: 58%;
+            }
+            .list-container {
+                flex: 2;
+                right: 23%;
+                max-width: 100%;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                padding: 20px;
+                margin: 5px auto; /* centers the div */
+                overflow-x: auto;  /* enables horizontal scroll if needed */
+                background-color: #fff;
+                box-shadow: 0 0 10px rgba(0,0,0,0.1);
+                border-radius: 8px;
+               
+            }
+          
+            table {
+                width: 120%;
+                border-collapse: collapse;
+            }
+            th, td {
+                padding: 6px;
+                text-align: left;
+                border: 1px solid #ccc;
+            }
+        </style>
+</head>
+
+    
+<body>
+   <div class="list-container">
+        <h1>Student Information</h1>
+        <table id="id" border="1" class="table table-bordered table-striped table-sm">
+            <thead class="table-dark">
+                <th scope="col">ID Number</th>
+                <th scope="col">Last</th>
+                <th scope="col">First</th>
+                <th scope="col">Middle</th>
+                <th scope="col">Birthday<br>(dd/mm/yyyy)</th>
+                <th scope="col">Weight<br>(kg)</th>
+                <th scope="col">Height<br>(meters)</th>
+                <th scope="col">Height²<br>(m²)</th>
+                <th scope="col">Gender</th>
+                <th>Age<br>y , m</th>
+                <th>Body Mass<br>Index</th>
+                <th>Nutritional<br>Status</th>
+                <th>Height-For-Age</th>
+                <th colspan="2" id="mid">Action</th>
+            </thead>
+            {% for x in mem %}
+            <tr>
+                <td>{{x.id_no}}</td>
+                <td>{{x.last}}</td>
+                <td>{{x.first}}</td>
+                <td>{{x.middle}}</td>
+                <td>{{x.birthday}}</td>
+                <td>{{x.weight}}</td>
+                <td>{{x.height}}</td>
+                <td>{{x.height_squared}}</td>
+                <td>{{x.gender}}</td>
+                <td>{{x.age_years_months}}</td>
+                <td>{{x.bmi}}</td>
+                <td>{{x.nutritional_status}}</td>
+                <td>{{x.height_for_age}}</td>
+                <td>
+                    <a href = "{% url 'update' x.id_no%}" class="btn btn-success btn-primary">Update</a>
+                </td>
+                <td>
+                    <a href = "{% url 'delete' x.id_no%}" class="btn btn-danger btn-primary">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+  
+</body>
+
+</html>
+{% endblock %}

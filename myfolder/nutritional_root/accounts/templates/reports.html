@@ -1,0 +1,20 @@
+{% extends 'accounts/home.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<h2>Student Report</h2>
+<table>
+  <tr>
+    <th>Name</th>
+    <th>BMI</th>
+  </tr>
+  {% for student in students %}
+  <tr>
+    <td>{{ student.first }} {{ student.last }}</td>
+    <td>{{ student.bmi }}</td>
+  </tr>
+  {% endfor %}
+</table>
+</html>
+{% endblock %}
